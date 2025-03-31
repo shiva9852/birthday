@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Bestie!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffccff;
+            padding: 20px;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            animation: bounce 1.5s infinite alternate;
+            max-width: 90%;
+        }
+        h1, .countdown, .marquee span, p {
+            color: #ff3399;
+        }
+        img {
+            width: 100%;
+            max-width: 400px; /* Ensures images are not too large on wide screens */
+            height: auto;
+            border-radius: 10px;
+            margin-top: 15px;
+            box-shadow: 0 0 15px #ff66b2;
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+        .marquee span {
+            display: inline-block;
+            animation: marquee 10s linear infinite;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        @keyframes marquee {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ff3399;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            from { transform: translateY(-10vh); opacity: 1; }
+            to { transform: translateY(100vh); opacity: 0; }
+        }
+        .countdown {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            background-color: #ff3399;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #ff66b2;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            .countdown {
+                font-size: 18px;
+            }
+            .marquee span {
+                font-size: 16px;
+            }
+            button {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Happy Birthday, Kajal! 🎂✨ </h1>
+    <div class="countdown" id="countdown"></div>
+
+    <button onclick="playBirthdaySong()">🎶 Play Birthday Song</button>
+    <audio id="birthday-song" loop>
+        <source src="happy-birthday-254480.mp3" type="audio/mpeg">
+    </audio>
+
+    
+
+    <div class="marquee">
+        <span>Wishing you a fantastic birthday filled with love and joy! 💖</span>
+    </div>
+
+    <div class="container">
+        <img src="C:\Users\shiva\OneDrive\Documents\Desktop\HTML\BIRTHDAY\photo_2025-03-31_21-26-17.jpg" alt="Bestie Photo">
+        <p>Have an amazing day filled with love and joy! 🎁🎈</p>
+        
+        <!-- Centered GIF -->
+        <div style="text-align: center;">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpoc3E1OWxyMmlndjVhcWs5MDF6enM4NnZwbHNya3Q4cmpkaXA3aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rkPsgps6o8HTkwC9vy/giphy.gif" 
+                 alt="Animated Birthday Cake" 
+                 style="display: block; margin: 0 auto;">
+        </div>
+
+        <div id="hidden-message" class="hidden" style="font-size: 20px;">🎊 Today, on your special day, I just want to remind you how truly amazing you are. You light up every room with your energy, bring joy to everyone around you, and make life so much more colorful.
+
+May this year bring you unlimited happiness, crazy adventures, and all the love you deserve. I’m so lucky to have you in my life, and I can’t wait to create even more unforgettable memories together.
+
+So here’s to more laughter, late-night talks, inside jokes, and dreams that come true! Enjoy your special day, bestie! You deserve ALL the happiness in the world!
+Kajal, you have this magical way of making even the most ordinary days feel special. Your laughter is contagious, your kindness is endless, and your heart is pure gold. Life wouldn’t be the same without you!
+
+Today, I hope you’re showered with all the love, happiness, and surprises you deserve. May this year bring you bigger dreams, endless smiles, and memories that make your heart full. 🎊</div>
+        <button onclick="showMessage()">Click for a Surprise!</button>
+    </div>
+
+    <script>
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+        setInterval(createConfetti, 1000);
+
+        function playBirthdaySong() {
+            let song = document.getElementById("birthday-song");
+            song.play();
+        }
+
+        function playVoiceMessage() {
+            let audio = document.getElementById("voice-message");
+            audio.play();
+        }
+
+        function showMessage() {
+            document.getElementById("hidden-message").classList.remove("hidden");
+        }
+
+        function startCountdown() {
+            let birthday = new Date("April 1, 2025 00:00:00").getTime();
+            let countdownElement = document.getElementById("countdown");
+
+            let interval = setInterval(() => {
+                let now = new Date().getTime();
+                let distance = birthday - now;
+
+                if (distance <= 0) {
+                    clearInterval(interval);
+                    countdownElement.innerHTML = "🎉 It's your birthday! Enjoy your special day! 🎉";
+                    return;
+                }
+
+                let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `🎉 ${days}d ${hours}h ${minutes}m ${seconds}s until your special day! 🎉`;
+            }, 1000);
+        }
+        startCountdown();
+    </script>
+</body>
+</html>
